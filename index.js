@@ -55,7 +55,7 @@ client.on('message', async msg => {
                 const video2 = await youtube.getVideoByID(video.id);
                 await handleVideo(video2, msg, voiceChannel, true);
             }
-            return msg.channel.send(` **${playlist.title}** تم الإضآفة إلى قأئمة التشغيل`);
+            return msg.channel.send(` **${playlist.title}** added to queue list`);
         } else {
             try {
  
@@ -122,7 +122,7 @@ ${videos.map(video2 => `[**${++index}**] **${video2.title}**`).join('\n')}`)
     } else if (command === `replay`) {
         if (!serverQueue) return msg.channel.send('nothing playing.');
         const embedNP = new Discord.RichEmbed()
-    .setDescription(`سيتم اعاده تشغيل الفديو :**${serverQueue.songs[0].title}**`)
+    .setDescription(`replaying :**${serverQueue.songs[0].title}**`)
     msg.channel.send({embed: embedNP})
      return handleVideo(video, msg, msg.member.voiceChannel);
  
@@ -132,7 +132,7 @@ ${videos.map(video2 => `[**${++index}**] **${video2.title}**`).join('\n')}`)
         const embedqu = new Discord.RichEmbed()
 .setDescription(`**Songs Queue**
 ${serverQueue.songs.map(song => `**${++index} -** ${song.title}`).join('\n')}
-**الان يتم تشغيل** ${serverQueue.songs[0].title}`)
+**now playing** ${serverQueue.songs[0].title}`)
         return msg.channel.sendEmbed(embedqu);
     } else if (command === `pause`) {
         if (serverQueue && serverQueue.playing) {
@@ -335,6 +335,8 @@ stop the song
 skip the song
 **${prefix}queue**
 queue list
+**${prefix}replay**
+replay the song
 **${prefix}np**
 current music
 **${prefix}vol**
