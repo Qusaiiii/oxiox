@@ -453,14 +453,6 @@ if (message.content.startsWith(prefix + 'setplay')) {
 });
 
 
- client.on('message', message => {
-        var  user = message.mentions.users.first() || message.author;
-    if (message.content.startsWith("$avatar")) {
-message.channel.send(`This avatar For ${user} link : ${user.avatarURL}`);
-}
-});
-
-
 
 
 client.login(process.env.BOT_TOKEN); 
