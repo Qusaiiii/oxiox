@@ -325,6 +325,20 @@ function play(guild, song) {
 
       message.author.sendMessage(`
 
+     __**Public Commands**__
+
+**${prefix}members**
+members infomation
+**${prefix}avatar**
+user avatar
+
+     __**Staff Commands**__
+
+**${prefix}server**
+server infomation
+**${prefix}role-info** 
+role information
+
      __**Music Commands**__
 
 **${prefix}play**
@@ -417,6 +431,49 @@ if (message.content.startsWith(prefix + 'setplay')) {
         message.channel.send({embed:embed})
     }
 });
+
+  if(message.content.startsWith(prefix + "role-info")) {
+    if(!args) return message.reply('write role name');
+    if(!role) return message.reply('cannot find this role');
+    let iQp = new Discord.RichEmbed()
+    .setAuthor(message.author.tag,message.author.avatarURL)
+    .setTitle(message.guild.name)
+    .setThumbnail(message.guild.iconURL)
+    .addField('- Role Name',role.name,true)
+    .addField('- Role ID',role.id,true)
+    .addField('- Role Created AT',role.createdAt.toLocaleString(),true)
+    .addField('- Role Color',role.hexColor,true)
+    .addField('- Number of people have this role',role.members.size,true)
+    .addField('- Role Position',role.position,true)
+    .addField('- Role Permission',role.permissions,true)
+    .setFooter(message.author.tag,message.author.avatarURL);
+
+    message.channel.send(iQp);
+  }
+});
+
+                    if (message.content === prefix + "members") {
+ const embed = new Discord.RichEmbed()
+
+    .setDescription(`**Members Infomation✨
+💚 online:   ${message.guild.members.filter(m=>m.presence.status == 'online').size}
+❤  dnd:       ${message.guild.members.filter(m=>m.presence.status == 'dnd').size}
+💛  idle:     ${message.guild.members.filter(m=>m.presence.status == 'idle').size}
+💠   membersCount:  ${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size}
+💡 bots: ${message.guild.members.filter(m=>m.user.bot).size} **`)
+         message.channel.send({embed});
+
+    }
+});
+
+ client.on('message', message => {
+        var  user = message.mentions.users.first() || message.author;
+    if (message.content.startsWith("$avatar")) {
+message.channel.send(`This avatar For ${user} link : ${user.avatarURL}`);
+}
+});
+
+
 
 
 client.login(process.env.BOT_TOKEN); 
