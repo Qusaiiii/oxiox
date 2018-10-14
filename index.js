@@ -327,17 +327,8 @@ function play(guild, song) {
 
      __**Public Commands**__
 
-**${prefix}members**
-members infomation
-**${prefix}avatar**
-user avatar
 
      __**Staff Commands**__
-
-**${prefix}server**
-server infomation
-**${prefix}role-info** 
-role information
 
      __**Music Commands**__
 
@@ -411,48 +402,6 @@ if (message.content.startsWith(prefix + 'setplay')) {
     message.channel.sendMessage(`Playing: **${argresult}`)
 } 
 
-
-
 });
-
-  client.on("message", message => {
-    if(message.content.startsWith(prefix + "server")) {
-        if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("**You Dont have access to use this command ❌**");
-        const embed = new Discord.RichEmbed()
-        .setAuthor(message.guild.name, message.guild.iconURL)
-        .setColor("RANDOM")
-
-.addField('**Members Count 👤 **' , `${message.guild.memberCount}`)
-.addField('**Server Owner👑**' , `${message.guild.owner.user.username}`)
-.addField(`**Channel :scroll: **`,true)
-.addField(`# text`, `${message.guild.channels.filter(m => m.type === 'text').size}`)
-.addField( `:loud_sound: voice `,`${message.guild.channels.filter(m => m.type === 'voice').size}`)
-.addField(`**Ranks Number**:briefcase:`,`${message.guild.roles.size}`)
-        message.channel.send({embed:embed})
-    }
-});
-
-  if(message.content.startsWith(prefix + "role-info")) {
-    if(!args) return message.reply('write role name');
-    if(!role) return message.reply('cannot find this role');
-    let iQp = new Discord.RichEmbed()
-    .setAuthor(message.author.tag,message.author.avatarURL)
-    .setTitle(message.guild.name)
-    .setThumbnail(message.guild.iconURL)
-    .addField('- Role Name',role.name,true)
-    .addField('- Role ID',role.id,true)
-    .addField('- Role Created AT',role.createdAt.toLocaleString(),true)
-    .addField('- Role Color',role.hexColor,true)
-    .addField('- Number of people have this role',role.members.size,true)
-    .addField('- Role Position',role.position,true)
-    .addField('- Role Permission',role.permissions,true)
-    .setFooter(message.author.tag,message.author.avatarURL);
-
-    message.channel.send(iQp);
-  }
-});
-
-
-
 
 client.login(process.env.BOT_TOKEN); 
