@@ -452,19 +452,6 @@ if (message.content.startsWith(prefix + 'setplay')) {
   }
 });
 
-                    if (message.content === prefix + "members") {
- const embed = new Discord.RichEmbed()
-
-    .setDescription(`**Members Infomation✨
-💚 online:   ${message.guild.members.filter(m=>m.presence.status == 'online').size}
-❤  dnd:       ${message.guild.members.filter(m=>m.presence.status == 'dnd').size}
-💛  idle:     ${message.guild.members.filter(m=>m.presence.status == 'idle').size}
-💠   membersCount:  ${message.guild.memberCount - message.guild.members.filter(m=>m.user.bot).size}
-💡 bots: ${message.guild.members.filter(m=>m.user.bot).size} **`)
-         message.channel.send({embed});
-
-    }
-});
 
  client.on('message', message => {
         var  user = message.mentions.users.first() || message.author;
