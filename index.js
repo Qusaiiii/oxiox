@@ -401,5 +401,22 @@ if (message.content.startsWith(prefix + 'setplay')) {
 
 });
 
+  client.on("message", message => {
+    if(message.content.startsWith(prefix + "server")) {
+        if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send("**You Dont have access to use this command ❌**");
+        const embed = new Discord.RichEmbed()
+        .setAuthor(message.guild.name, message.guild.iconURL)
+        .setColor("RANDOM")
+
+.addField('**Members Count 👤 **' , `${message.guild.memberCount}`)
+.addField('**Server Owner👑**' , `${message.guild.owner.user.username}`)
+.addField(`**Channel :scroll: **`,true)
+.addField(`# text`, `${message.guild.channels.filter(m => m.type === 'text').size}`)
+.addField( `:loud_sound: voice `,`${message.guild.channels.filter(m => m.type === 'voice').size}`)
+.addField(`**Ranks Number**:briefcase:`,`${message.guild.roles.size}`)
+        message.channel.send({embed:embed})
+    }
+});
+
 
 client.login(process.env.BOT_TOKEN); 
